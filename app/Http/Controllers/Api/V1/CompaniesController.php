@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Company;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class DashboardController extends Controller
+class CompaniesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +15,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
-		// return view('companies.index');
+        return Company::all();
     }
 
     /**
@@ -35,7 +36,11 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+		$company = Company::create($request->all());
+		return $company;
+		
+        
     }
 
     /**
@@ -46,7 +51,7 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        //
+        return Company::findOrFail($id);
     }
 
     /**
@@ -69,7 +74,12 @@ class DashboardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+		$company = Company::findOrFail($id);
+		$company->update($request->all());
+
+		return $company;
+
     }
 
     /**
@@ -80,6 +90,11 @@ class DashboardController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $company = Company::findOrFail($id);
+        $company->delete();
+        return '';
+		
+
     }
 }

@@ -26,4 +26,28 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * The attributes that are not mass assignable, or the opposite of fillable (recommended compared to fillable)
+     *
+     * @var array
+     */
+    protected $guarded = [
+        
+    ];  
+
+    /**
+     * A user has many comments
+     *
+     */
+    
+    public function comments()
+    {
+
+    	return $this->hasMany(Comment::class);
+        
+    }
+
+
+	
 }
